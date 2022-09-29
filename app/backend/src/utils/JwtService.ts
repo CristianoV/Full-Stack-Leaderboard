@@ -7,4 +7,8 @@ export default class JwtSecret {
   public static sign(payload: Record<string, string>): string {
     return jtw.sign(payload, this.segredo, this.algorithm);
   }
+
+  public static decode(payload: string) {
+    return jtw.decode(payload);
+  }
 }
