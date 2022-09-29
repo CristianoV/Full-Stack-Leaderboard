@@ -1,3 +1,4 @@
+import PersonalError from '../utils/PersonalError';
 import JwtSecret from '../utils/JwtService';
 import UserDTO from '../controllers/user/dto/UserDTO';
 // import { UserDTO, UserDTOValidation } from '../controllers/user/dto/UserDTO';
@@ -16,21 +17,28 @@ class UserService implements IUserService {
   }
 
   public async login(email: string, password: string) {
-    if (!email || !password) return { error: 'Invalid email or password' };
+    if (!email || !password) return new PersonalError('All fields must be filled', 400);
     const findByEmail = await this.userModel.findOne({
       where: { email },
     });
 
-    if (!findByEmail) return { message: 'Email not found' };
+    if (!findByEmail) return new PersonalError('Incorrect email or password', 401);
 
     const verifyPassword = BcryptService.compare(findByEmail.password, password);
 
-    if (!verifyPassword) return { message: 'Password incorrect' };
+    if (!verifyPassword) return new PersonalError('Incorrect email or password', 401);
     if (verifyPassword) {
-      const token = JwtSecret.sign({ findByEmail });
+      const { role } = findByEmail;
+      const token = JwtSecret.sign({ role });
+      console.log(token);
 
       return { token };
     }
+  }
+
+  public static validateLogin(token: any) {
+    const validate = JwtSecret.decode(token);
+    return validate;
   }
 }
 
