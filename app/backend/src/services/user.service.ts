@@ -1,6 +1,6 @@
 import PersonalError from '../utils/PersonalError';
 import JwtSecret from '../utils/JwtService';
-import UserDTO from '../controllers/user/dto/UserDTO';
+import UserDTO from '../controllers/dto/UserDTO';
 // import { UserDTO, UserDTOValidation } from '../controllers/user/dto/UserDTO';
 import User from '../database/models/users';
 // import IModel from '../interfaces/IModel';
@@ -30,7 +30,6 @@ class UserService implements IUserService {
     if (verifyPassword) {
       const { role } = findByEmail;
       const token = JwtSecret.sign({ role });
-      console.log(token);
 
       return { token };
     }

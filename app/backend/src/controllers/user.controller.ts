@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import UserService from '../../services/users';
+import UserService from '../services/user.service';
 
 export default class UserController {
   constructor(private userService: UserService) {}
@@ -21,7 +21,7 @@ export default class UserController {
   static async validade(req: Request, res: Response) {
     const { authorization } = req.headers;
 
-    const valid = UserService.validateLogin(authorization);
+    const valid = UserService.validateLogin(authorization as string);
     return res.status(200).json(valid);
   }
 }

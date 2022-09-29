@@ -1,4 +1,4 @@
-import UserDTO from '../controllers/user/dto/UserDTO';
+import UserDTO from '../controllers/dto/UserDTO';
 import User from '../database/models/users';
 
 interface IUserService {
