@@ -9,4 +9,12 @@ export default class UserController {
 
     return res.status(200).json(teams);
   }
+
+  async getById(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const team = await this.teamService.findById(id);
+
+    return res.status(200).json(team);
+  }
 }
