@@ -22,13 +22,6 @@ const TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NjQ0NzgyNTd9.I4bUZxWW4Y9AKJH7d1scfJjM4_WigatGzhaD7TcCGaQ';
 
 describe('Testando o User.service', () => {
-  // const userModel = {
-  //   findOne: Sinon.stub(User, 'findOne').resolves(userMock as User),
-  // };
-
-  // const userModelError = {
-  //   findOne: () => Promise.resolve(),
-  // };
 
   const service = new UserService(User);
 
