@@ -8,6 +8,12 @@ class TeamService implements ITeamService {
 
     return allTeams;
   }
+
+  public async findById(id: string) {
+    const team = await this.teamModel.findByPk(id);
+
+    return team;
+  }
 }
 
 export default TeamService;
