@@ -13,11 +13,13 @@ Teams.init({
     primaryKey: true,
     type: INTEGER,
   },
-  teamName: STRING,
+  teamName: {
+    type: STRING,
+  },
 }, {
   underscored: true,
   sequelize: db,
-  modelName: 'users',
+  modelName: 'teams',
   timestamps: false,
 });
 
