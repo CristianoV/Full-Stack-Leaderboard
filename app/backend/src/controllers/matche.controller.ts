@@ -11,4 +11,14 @@ export default class UserController {
 
     return res.status(200).json(teams);
   }
+
+  async createMatche(req: Request, res: Response) {
+    const { body } = req;
+
+    // console.log(req.headers.authorization);
+
+    const matche = await this.teamService.createMatche(body);
+
+    return res.status(201).json(matche);
+  }
 }
