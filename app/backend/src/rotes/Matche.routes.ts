@@ -8,5 +8,6 @@ const matchService = new MatcheService(Matche);
 const matchController = new MatcheController(matchService);
 
 MatcheRoutes.get('/matches', (req, res) => matchController.findAllMatche(req, res));
+MatcheRoutes.post('/matches', (req, res) => matchController.createMatche(req, res));
 
 export default MatcheRoutes;
