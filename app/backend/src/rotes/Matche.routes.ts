@@ -22,4 +22,7 @@ MatcheRoutes.post(
 MatcheRoutes.patch('/matches/:id/finish', (req, res) =>
   matchController.updateMatche(req, res));
 
+MatcheRoutes.patch('/matches/:id', (req, res) =>
+  matchController.updateMatcheResult(req, res));
+
 export default MatcheRoutes;

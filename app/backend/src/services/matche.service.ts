@@ -42,4 +42,12 @@ export default class MatcheService implements IMatcheService {
 
     return { message: 'Finished' };
   }
+
+  public async updateMatcheResult(id: number, result: any) {
+    const find = await this.matcheModel.findByPk(id);
+
+    await find.update(result);
+
+    return { message: 'Updated!' };
+  }
 }

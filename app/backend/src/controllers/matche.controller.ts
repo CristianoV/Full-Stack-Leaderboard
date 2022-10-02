@@ -27,4 +27,16 @@ export default class UserController {
 
     return res.status(200).json(matche);
   }
+
+  async updateMatcheResult(req: Request, res: Response) {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    const matche = await this.teamService.updateMatcheResult(Number(id), {
+      homeTeamGoals,
+      awayTeamGoals,
+    });
+
+    return res.status(200).json(matche);
+  }
 }
