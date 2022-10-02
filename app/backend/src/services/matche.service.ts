@@ -2,7 +2,7 @@
 import Teams from '../database/models/teams';
 import IMatcheService from '../interfaces/iMatcheService';
 
-class MatcheService implements IMatcheService {
+export default class MatcheService implements IMatcheService {
   constructor(private matcheModel: any) {}
 
   public async findAllMatche(inProgress: any) {
@@ -28,6 +28,12 @@ class MatcheService implements IMatcheService {
 
     return find;
   }
-}
 
-export default MatcheService;
+  public async updateMatche(id: number) {
+    const find = await this.matcheModel.findByPk(id);
+
+    await find.update({ inProgress: 0 });
+
+    return { message: 'Finished' };
+  }
+}
