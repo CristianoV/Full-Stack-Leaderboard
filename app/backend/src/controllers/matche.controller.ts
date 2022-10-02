@@ -15,8 +15,6 @@ export default class UserController {
   async createMatche(req: Request, res: Response) {
     const { body } = req;
 
-    // console.log(req.headers.authorization);
-
     const matche = await this.teamService.createMatche(body);
 
     return res.status(201).json(matche);
