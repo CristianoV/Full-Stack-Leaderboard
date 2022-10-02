@@ -21,4 +21,12 @@ export default class UserController {
 
     return res.status(201).json(matche);
   }
+
+  async updateMatche(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const matche = await this.teamService.updateMatche(Number(id));
+
+    return res.status(200).json(matche);
+  }
 }
