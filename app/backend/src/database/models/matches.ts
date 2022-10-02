@@ -53,21 +53,3 @@ Matche.belongsTo(Teams, { foreignKey: 'homeTeam', as: 'teamHome' });
 Matche.belongsTo(Teams, { foreignKey: 'awayTeam', as: 'teamAway' });
 
 export default Matche;
-
-// const teste = async () => {
-//   const ab = await Matche.findAll({
-//     include: [
-//       {
-//         model: Teams,
-//         as: 'home_team',
-//       },
-//       {
-//         model: Teams,
-//         as: 'away_team',
-//       },
-//     ],
-//   });
-//   console.log(ab);
-// };
-
-// teste();
