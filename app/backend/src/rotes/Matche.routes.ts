@@ -11,8 +11,13 @@ const matchController = new MatcheController(matchService);
 MatcheRoutes.get('/matches', (req, res) =>
   matchController.findAllMatche(req, res));
 
-MatcheRoutes.post('/matches', Validate.differentTeams, (req, res) =>
-  matchController.createMatche(req, res));
+MatcheRoutes.post(
+  '/matches',
+  Validate.differentTeams,
+  Validate.validateTeam,
+  Validate.validateAuthorization,
+  (req, res) => matchController.createMatche(req, res),
+);
 
 MatcheRoutes.patch('/matches/:id/finish', (req, res) =>
   matchController.updateMatche(req, res));
