@@ -8,14 +8,20 @@ export default class MatcheService implements IMatcheService {
   public async findAllMatche(inProgress: any) {
     if (!inProgress) {
       return this.matcheModel.findAll({
-        include: [{ model: Teams, as: 'teamHome' }, { model: Teams, as: 'teamAway' },
-        ] });
+        include: [
+          { model: Teams, as: 'teamHome' },
+          { model: Teams, as: 'teamAway' },
+        ],
+      });
     }
 
     return this.matcheModel.findAll({
       where: { inProgress: inProgress === 'true' ? 1 : 0 },
-      include: [{ model: Teams, as: 'teamHome' }, { model: Teams, as: 'teamAway' },
-      ] });
+      include: [
+        { model: Teams, as: 'teamHome' },
+        { model: Teams, as: 'teamAway' },
+      ],
+    });
   }
 
   public async createMatche(matche: any) {
