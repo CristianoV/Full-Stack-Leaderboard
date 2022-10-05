@@ -44,13 +44,9 @@ export default class MatcheService implements IMatcheService {
   }
 
   public async updateMatcheResult(id: number, result: Record<string, string | number>) {
-    console.log(result, id);
-
     const { homeTeamGoals, awayTeamGoals } = result;
 
     const find = await this.matcheModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
-
-    console.log(find);
 
     if (find) {
       return { message: 'Updated!' };
