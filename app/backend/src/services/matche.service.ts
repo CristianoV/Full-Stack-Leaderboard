@@ -1,9 +1,9 @@
-// import Matche from '../database/models/matches';
+import Matche from '../database/models/matches';
 import Teams from '../database/models/teams';
 import IMatcheService from '../interfaces/iMatcheService';
 
 export default class MatcheService implements IMatcheService {
-  constructor(private matcheModel: any) {}
+  constructor(private matcheModel: typeof Matche) {}
 
   public async findAllMatche(inProgress: any) {
     if (!inProgress) {
@@ -24,7 +24,7 @@ export default class MatcheService implements IMatcheService {
     });
   }
 
-  public async createMatche(matche: any) {
+  public async createMatche(matche: Record<string, string | number | boolean>) {
     const obj = { ...matche };
     obj.inProgress = matche.inProgress === true ? 1 : 0;
 
@@ -38,16 +38,17 @@ export default class MatcheService implements IMatcheService {
   public async updateMatche(id: number) {
     const find = await this.matcheModel.findByPk(id);
 
-    await find.update({ inProgress: 0 });
-
-    return { message: 'Finished' };
+    if (find) {
+      await find.update({ inProgress: 0 });
+      return { message: 'Finished' };
+    }
   }
 
-  public async updateMatcheResult(id: number, result: any) {
+  public async updateMatcheResult(id: number, result: Record<string, string | number>) {
     const find = await this.matcheModel.findByPk(id);
-
-    await find.update(result);
-
-    return { message: 'Updated!' };
+    if (find) {
+      await find.update(result);
+      return { message: 'Updated!' };
+    }
   }
 }
