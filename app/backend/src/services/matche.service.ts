@@ -36,18 +36,23 @@ export default class MatcheService implements IMatcheService {
   }
 
   public async updateMatche(id: number) {
-    const find = await this.matcheModel.findByPk(id);
+    const find = await this.matcheModel.update({ inProgress: 0 }, { where: { id } });
 
     if (find) {
-      await find.update({ inProgress: 0 });
       return { message: 'Finished' };
     }
   }
 
   public async updateMatcheResult(id: number, result: Record<string, string | number>) {
-    const find = await this.matcheModel.findByPk(id);
+    console.log(result, id);
+
+    const { homeTeamGoals, awayTeamGoals } = result;
+
+    const find = await this.matcheModel.update({ homeTeamGoals, awayTeamGoals }, { where: { id } });
+
+    console.log(find);
+
     if (find) {
-      await find.update(result);
       return { message: 'Updated!' };
     }
   }
