@@ -2,9 +2,10 @@ import PersonalError from '../utils/PersonalError';
 import JwtSecret from '../utils/JwtService';
 import IUserService from '../interfaces/IUserService';
 import BcryptService from '../utils/BcriptService';
+import UserModel from '../database/models/users';
 
 class UserService implements IUserService {
-  constructor(private userModel: any) { }
+  constructor(private userModel: typeof UserModel) { }
 
   public async login(email: string, password: string) {
     if (!email || !password) return new PersonalError('All fields must be filled', 400);
