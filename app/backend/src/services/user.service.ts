@@ -28,6 +28,7 @@ class UserService implements IUserService {
 
   public static validateLogin(token: any) {
     const validate = JwtSecret.decode(token);
+
     return validate;
   }
 }

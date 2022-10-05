@@ -13,10 +13,11 @@ export default class UserController {
     return res.status(200).json(user);
   }
 
-  static async validade(req: Request, res: Response) {
+  static validade(req: Request, res: Response) {
     const { authorization } = req.headers;
 
     const valid = UserService.validateLogin(authorization as string);
+
     return res.status(200).json(valid);
   }
 }

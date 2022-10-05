@@ -73,7 +73,6 @@ describe('Testando o User.controller', () => {
     const res = {} as Response;
 
     before(async () => {
-    //   Sinon.stub(UserService, 'validateLogin').resolves({ role: 'admin' });
       res.status = Sinon.stub().returns(res);
       res.json = Sinon.stub().returns(res);
     });

@@ -3,8 +3,6 @@ import JwtSecret from '../utils/JwtService';
 import Matche from '../database/models/teams';
 
 export default class Validate {
-  // const validateMatch = new MatcheService(Matche);
-
   static differentTeams(req: Request, res: Response, next: NextFunction) {
     const { body } = req;
     if (body.homeTeam === body.awayTeam) {
