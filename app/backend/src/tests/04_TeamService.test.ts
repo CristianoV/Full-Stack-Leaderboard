@@ -63,10 +63,9 @@ describe('Testando o Team.service', () => {
       });
       it('se ao chamar o metodo findById retorna um array um times', async () => {
         const team = await service.findById('1');
-    
+
         expect(team).to.be.an('array');
         expect(team).to.be.lengthOf(1);
-        expect(team[0]).to.be.keys('id', 'teamName');
         expect(team).to.be.deep.equal(userMockId);
     });
   });
