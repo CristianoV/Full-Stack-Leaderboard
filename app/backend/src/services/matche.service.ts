@@ -5,7 +5,7 @@ import IMatcheService from '../interfaces/iMatcheService';
 export default class MatcheService implements IMatcheService {
   constructor(private matcheModel: typeof Matche) {}
 
-  public async findAllMatche(inProgress: any) {
+  public async findAllMatche(inProgress: string) {
     if (!inProgress) {
       return this.matcheModel.findAll({
         include: [
@@ -16,7 +16,7 @@ export default class MatcheService implements IMatcheService {
     }
 
     return this.matcheModel.findAll({
-      where: { inProgress: inProgress === 'true' ? 1 : 0 },
+      where: { inProgress: JSON.parse(inProgress) },
       include: [
         { model: Teams, as: 'teamHome' },
         { model: Teams, as: 'teamAway' },

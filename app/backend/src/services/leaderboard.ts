@@ -41,7 +41,7 @@ export default class Leaderboards {
     return leaderboard;
   }
 
-  private static async getAway(match: any) {
+  private static async getAway(match: Matche[]) {
     const xablau = match.map((item: any) => {
       const pontos = { vitorias: 0, empates: 0, derrotas: 0, pontos: 0 };
 
@@ -63,7 +63,7 @@ export default class Leaderboards {
     return xablau;
   }
 
-  private static async getHome(match: any) {
+  private static async getHome(match: Matche[]) {
     const xablau = match.map((item: any) => {
       const pontos = { vitorias: 0, empates: 0, derrotas: 0, pontos: 0 };
 
@@ -106,7 +106,7 @@ export default class Leaderboards {
     return this.ordem(novoLista);
   }
 
-  private static ordem(teste: any) {
+  private static ordem(teste: ILeaderboard[]) {
     const amen = teste.map((game: ILeaderboard) => ({
       ...game,
       efficiency: ((game.totalPoints / (game.totalGames * 3)) * 100).toFixed(2),
