@@ -5,10 +5,13 @@ interface ILeaderboard {
 }
 
 export interface IBoard {
-  name: string, totalPoints: number, totalGames: number, totalVictories: number,
-  homeTeamGoals: number,
-  awayTeamGoals: number,
-  'teamAway.teamName': string,
+  id: number;
+  homeTeam: string;
+  homeTeamGoals: string;
+  awayTeam: string;
+  awayTeamGoals: string;
+  inProgress: string;
+  'teamAway.teamName': string;
 }
 
 export default ILeaderboard;

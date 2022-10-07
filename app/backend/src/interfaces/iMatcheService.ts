@@ -1,5 +1,7 @@
+import Matche from '../database/models/matches';
+
 interface IMatcheService {
-  findAllMatche(inProgress: any): any,
+  findAllMatche(inProgress: string): Promise<Matche[]>,
 }
 
 export default IMatcheService;

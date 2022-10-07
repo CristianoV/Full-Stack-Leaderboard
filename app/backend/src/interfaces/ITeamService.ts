@@ -1,8 +1,8 @@
 import Teams from '../database/models/teams';
 
 interface ITeamService {
-  allTeams(): any,
-  findById(id: string): Promise<Teams>,
+  allTeams(): Promise<Teams[]>,
+  findById(id: string): Promise<Teams | Record<string, string>>,
 }
 
 export default ITeamService;
