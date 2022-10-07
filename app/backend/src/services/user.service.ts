@@ -18,15 +18,14 @@ class UserService implements IUserService {
     const verifyPassword = BcryptService.compare(findByEmail.password, password);
 
     if (!verifyPassword) return new PersonalError('Incorrect email or password', 401);
-    if (verifyPassword) {
-      const { role } = findByEmail;
-      const token = JwtSecret.sign({ role });
 
-      return { token };
-    }
+    const { role } = findByEmail;
+    const token = JwtSecret.sign({ role });
+
+    return { token };
   }
 
-  public static validateLogin(token: any) {
+  public static validateLogin(token: string) {
     const validate = JwtSecret.decode(token);
 
     return validate;
