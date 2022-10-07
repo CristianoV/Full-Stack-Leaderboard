@@ -7,7 +7,7 @@ export default class UserController {
   async findAllMatche(req: Request, res: Response) {
     const { inProgress } = req.query;
 
-    const teams = await this.teamService.findAllMatche(inProgress);
+    const teams = await this.teamService.findAllMatche(inProgress as string);
 
     return res.status(200).json(teams);
   }
