@@ -30,7 +30,10 @@ export default class Validate {
 
   static validateAuthorization(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
-    const validate = JwtSecret.decode(authorization as any);
+
+    if (!authorization) return res.status(401).json({ message: 'Token not found' });
+
+    const validate = JwtSecret.decode(authorization as string);
 
     if (!validate) {
       return res.status(401).json({
