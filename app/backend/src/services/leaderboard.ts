@@ -1,4 +1,4 @@
-import ILeaderboard from '../interfaces/ILeaderboard';
+import ILeaderboard, { IBoard } from '../interfaces/ILeaderboard';
 import Teams from '../database/models/teams';
 import Matche from '../database/models/matches';
 
@@ -6,11 +6,11 @@ export default class Leaderboards {
   public static async getAllLeaderboard() {
     const matchTeamAway = await Matche.findAll({ raw: true,
       where: { inProgress: false },
-      include: [{ model: Teams, as: 'teamAway' }] });
+      include: [{ model: Teams, as: 'teamAway' }] }) as unknown as IBoard[];
     const matchTeamHome = await Matche.findAll({ raw: true,
       where: {
         inProgress: false },
-      include: [{ model: Teams, as: 'teamHome' }] });
+      include: [{ model: Teams, as: 'teamHome' }] }) as unknown as IBoard[];
 
     const home = await Leaderboards.getHome(matchTeamHome) as unknown as ILeaderboard[];
     const away = await Leaderboards.getAway(matchTeamAway) as unknown as ILeaderboard[];
@@ -24,8 +24,7 @@ export default class Leaderboards {
     const matchTeamHome = await Matche.findAll({ raw: true,
       where: {
         inProgress: false },
-      include: [{ model: Teams, as: 'teamHome' }] });
-
+      include: [{ model: Teams, as: 'teamHome' }] }) as unknown as IBoard[];
     const home = await Leaderboards.getHome(matchTeamHome) as unknown as ILeaderboard[];
     const leaderboard = Leaderboards.getLeaderboard(home);
     return leaderboard;
@@ -34,15 +33,15 @@ export default class Leaderboards {
   public static async getAwayLeaderboard() {
     const matchTeamAway = await Matche.findAll({ raw: true,
       where: { inProgress: false },
-      include: [{ model: Teams, as: 'teamAway' }] });
+      include: [{ model: Teams, as: 'teamAway' }] }) as unknown as IBoard[];
     const away = await Leaderboards.getAway(matchTeamAway) as unknown as ILeaderboard[];
     const leaderboard = Leaderboards.getLeaderboard(away);
 
     return leaderboard;
   }
 
-  private static async getAway(match: Matche[]) {
-    const xablau = match.map((item: any) => {
+  private static async getAway(match: IBoard[]) {
+    const board = match.map((item: IBoard) => {
       const pontos = { vitorias: 0, empates: 0, derrotas: 0, pontos: 0 };
 
       if (item.homeTeamGoals < item.awayTeamGoals) pontos.vitorias += 1;
@@ -60,11 +59,11 @@ export default class Leaderboards {
         goalsBalance: item.awayTeamGoals - item.homeTeamGoals,
       };
     });
-    return xablau;
+    return board;
   }
 
-  private static async getHome(match: Matche[]) {
-    const xablau = match.map((item: any) => {
+  private static async getHome(match: IBoard[]) {
+    const board = match.map((item: IBoard) => {
       const pontos = { vitorias: 0, empates: 0, derrotas: 0, pontos: 0 };
 
       if (item.homeTeamGoals > item.awayTeamGoals) pontos.vitorias += 1;
@@ -82,7 +81,7 @@ export default class Leaderboards {
         goalsBalance: item.homeTeamGoals - item.awayTeamGoals,
       };
     });
-    return xablau;
+    return board;
   }
 
   private static async getLeaderboard(all: ILeaderboard[]) {
