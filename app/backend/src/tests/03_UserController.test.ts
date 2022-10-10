@@ -1,14 +1,11 @@
 import * as chai from 'chai';
 // @ts-ignore
-import chaiHttp = require('chai-http');
 import UserService from '../services/user.service';
 import UserController from '../controllers/user.controller';
 import User from '../database/models/users';
 import * as Sinon from 'sinon';
 import { Request, Response } from 'express';
 import PersonalError from '../utils/PersonalError';
-
-chai.use(chaiHttp);
 
 const { expect } = chai;
 
