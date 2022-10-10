@@ -1,17 +1,24 @@
 interface ILeaderboard {
-  totalGames: number, goalsOwn: number, goalsFavor: number,
-  totalLosses: number, totalDraws: number, totalVictories: number, totalPoints: number,
-  goalsBalance: number, name: string
+  name: string;
+  totalGames: number;
+  goalsOwn: number;
+  goalsFavor: number;
+  totalLosses: number;
+  totalDraws: number;
+  totalVictories: number;
+  totalPoints: number;
+  goalsBalance: number;
 }
 
 export interface IBoard {
   id: number;
-  homeTeam: string;
-  homeTeamGoals: string;
-  awayTeam: string;
-  awayTeamGoals: string;
-  inProgress: string;
-  'teamAway.teamName': string;
+  homeTeam: number;
+  homeTeamGoals: number;
+  awayTeam: number;
+  awayTeamGoals: number;
+  inProgress: number;
+  'teamAway.teamName'?: string;
+  'teamHome.teamName'?: string;
 }
 
 export default ILeaderboard;
